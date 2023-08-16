@@ -22,7 +22,8 @@ public class NpoReservasCancha implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rsc_id", nullable = false)
+    @Basic(optional = false)
+    @Column(name = "rsc_id")
     private Integer id;
 
     @Column(name = "rsc_tipo_reserva", length = 3)

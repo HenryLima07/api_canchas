@@ -7,9 +7,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -24,8 +22,7 @@ public class NpoPersona implements Serializable {
 
     @Id
     @Basic(optional = false)
-    //must implement auto-incrementation on postgres schema
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "per_id")
     private Integer id;
 
@@ -47,7 +44,7 @@ public class NpoPersona implements Serializable {
     @Column(name = "per_telefono", length = 20)
     private String perTelefono;
 
-    @Column(name = "per_clave", length = 20)
+    @Column(name = "per_clave") //, length = 20
     private String perClave;
 
     @Column(name = "pre_fecha_registro")
@@ -57,9 +54,10 @@ public class NpoPersona implements Serializable {
     private Set<NpoAlumno> alumnos = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "persona")
-    private Set<NpoPaquetesComprado> npoPaquetesComprados = new LinkedHashSet<>();
+    private List<NpoPaquetesComprado> npoPaquetesComprados = new ArrayList<>();
 
     @OneToMany(mappedBy = "persona")
-    private Set<NpoReservasCancha> reservasCanchas = new LinkedHashSet<>();
+    private List<NpoReservasCancha> reservasCanchas = new ArrayList<>();
 
 }
+//TODO: Edited to long here

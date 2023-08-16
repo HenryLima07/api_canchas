@@ -21,4 +21,6 @@ public class PersonaDto {
 
     private String perTelefono;
 
+//    private String perClave;
+
 }

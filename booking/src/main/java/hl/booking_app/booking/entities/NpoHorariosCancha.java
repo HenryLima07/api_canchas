@@ -17,7 +17,8 @@ import java.util.Set;
 public class NpoHorariosCancha {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hoc_id", nullable = false)
+    @Column(name = "hoc_id")
+    @Basic(optional = false)
     private Integer id;
 
     @Column(name = "hoc_tipo_horario", length = 3)

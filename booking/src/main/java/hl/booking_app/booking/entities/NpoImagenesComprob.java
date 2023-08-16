@@ -14,7 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NpoImagenesComprob {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "img_id", nullable = false)
+    @Column(name = "img_id")
+    @Basic(optional = false)
     private Integer id;
 
     @Column(name = "img_tipo", length = 3)

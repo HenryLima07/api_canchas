@@ -20,7 +20,8 @@ public class NpoHorariosClase implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hcl_id", nullable = false)
+    @Column(name = "hcl_id")
+    @Basic(optional = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

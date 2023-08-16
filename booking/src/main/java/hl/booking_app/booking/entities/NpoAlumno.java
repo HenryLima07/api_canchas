@@ -25,7 +25,8 @@ public class NpoAlumno implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "alm_id", nullable = false)
+    @Column(name = "alm_id")
+    @Basic(optional = false)
     private Integer id;
 
     @Column(name = "alm_fecha_inicio", columnDefinition = "DATE")

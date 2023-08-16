@@ -20,7 +20,8 @@ public class NpoClasesAlumno implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cla_id", nullable = false)
+    @Column(name = "cla_id")
+    @Basic(optional = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

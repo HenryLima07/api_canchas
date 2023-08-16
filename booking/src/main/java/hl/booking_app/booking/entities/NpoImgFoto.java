@@ -14,7 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NpoImgFoto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "fot_id", nullable = false)
+    @Column(name = "fot_id")
+    @Basic(optional = false)
     private Integer id;
 
     @Column(name = "fot_imagen")

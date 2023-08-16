@@ -70,7 +70,15 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(a -> a
                                 .antMatchers("/api/user/login").permitAll()
                                 .antMatchers("/api/user/singin").permitAll()
-                                .antMatchers("/api/persona/**").hasAuthority(rol.getUser())
+                                .antMatchers("/api/persona/own/**").hasAuthority(rol.getUser())
+                                .antMatchers("api/persona/**").hasAuthority(rol.getAdmin())
+                                .antMatchers("api/canchas/adm/**").hasAuthority(rol.getAdmin())
+                                .antMatchers("api/canchas/**").permitAll()
+                                .antMatchers("api/paquete/adm/**").hasAuthority(rol.getAdmin())
+                                .antMatchers("api/paquete/**").permitAll()
+                                .antMatchers("api//reserva/own").hasAuthority(rol.getUser())
+                                .antMatchers("api/paqueteComprado/own").hasAuthority(rol.getUser())
+//                                .anyRequest().authenticated()
                                 .anyRequest().permitAll()
                         );
         http.authenticationProvider(authenticationProvider());

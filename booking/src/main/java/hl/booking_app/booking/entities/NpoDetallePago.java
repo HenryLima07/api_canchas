@@ -22,7 +22,8 @@ public class NpoDetallePago implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dtp_id", nullable = false)
+    @Column(name = "dtp_id")
+    @Basic(optional = false)
     private Integer id;
 
     @Column(name = "dtp_fecha_desde", columnDefinition = "DATE")

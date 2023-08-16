@@ -22,7 +22,8 @@ public class NpoPaquetesComprado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pqc_id", nullable = false)
+    @Column(name = "pqc_id")
+    @Basic(optional = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

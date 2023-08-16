@@ -8,9 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -25,7 +23,8 @@ public class NpoPaquete implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "paq_id", nullable = false)
+    @Basic(optional = false)
+    @Column(name = "paq_id")
     private Integer id;
 
     @Column(name = "paq_nombre", length = 50)
@@ -53,6 +52,6 @@ public class NpoPaquete implements Serializable {
     private String paqLinkPago;
 
     @OneToMany(mappedBy = "paq")
-    private Set<NpoPaquetesComprado> paquetesComprados = new LinkedHashSet<>();
+    private List<NpoPaquetesComprado> paquetesComprados = new ArrayList<>();
 
 }

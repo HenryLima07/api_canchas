@@ -2,7 +2,8 @@ package hl.booking_app.booking.controller;
 
 import hl.booking_app.booking.dto.GeneralResponseDto;
 import hl.booking_app.booking.dto.LoginDto;
-import hl.booking_app.booking.dto.request.CreatePersonaRequest;
+import hl.booking_app.booking.dto.PersonaDto;
+import hl.booking_app.booking.dto.request.PersonaRequest;
 import hl.booking_app.booking.entities.NpoPersona;
 import hl.booking_app.booking.helpers.ResponseHelpers;
 import hl.booking_app.booking.security.JwtResponse;
@@ -18,13 +19,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
-
+//TODO: send encrypted password when singing in
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -49,14 +51,15 @@ public class UserController {
     GeneralResponseDto generalResponseDto;
 
     @PostMapping("/singin")
-    public ResponseEntity<GeneralResponseDto> singin(@RequestBody CreatePersonaRequest req){
+    public ResponseEntity<GeneralResponseDto> singin(@RequestBody PersonaRequest req){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        req.setPerClave(encoder.encode(req.getPerClave()));
         ResponseHelpers<GeneralResponseDto> response = new ResponseHelpers<>();
 
         try{
             NpoPersona newRequestPersona = dozerMapper.map(req, NpoPersona.class);
-            newRequestPersona.setId(3);
             newRequestPersona.setPreFechaRegistro(Instant.now());
-            String result = personaService.savePersona(newRequestPersona);
+            PersonaDto result = personaService.savePersona(newRequestPersona);
 
             //setting response
             generalResponseDto.setMessage(responses.getSuccessfulMessage());
@@ -72,8 +75,8 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<GeneralResponseDto> login(@RequestBody LoginDto req) throws Exception{
-        Authentication auth = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
+        Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
+        System.out.println(auth.getPrincipal().toString());
         String token = null;
         if (auth.isAuthenticated()) {
             final UserDetails userDetails = personaService.loadUserByUsername(req.getEmail());

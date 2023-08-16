@@ -24,7 +24,8 @@ public class NpoClasesGrupal implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "clg_id", nullable = false)
+    @Column(name = "clg_id")
+    @Basic(optional = false)
     private Integer id;
 
     @Column(name = "clg_nivel")

@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class JwtRequestFilter extends OncePerRequestFilter{
 
     @Autowired
     private PersonaService personaService;
@@ -36,10 +36,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         final String requestTokenHeader = request.getHeader("Authorization");
         Iterator<String> itr = request.getHeaderNames().asIterator();
-        while(itr.hasNext()){
-            String name = itr.next();
-            System.out.println("Header: " + name);
-        }
+//        while(itr.hasNext()){
+//            String name = itr.next();
+//            System.out.println("Header: " + name);
+//        }
 
         String username = null;
         String jwtToken = null;

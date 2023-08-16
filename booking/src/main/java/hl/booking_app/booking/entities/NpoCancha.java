@@ -6,7 +6,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -21,8 +23,9 @@ public class NpoCancha implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "can_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "can_id", nullable = false)
+    @Basic(optional = false)
     private Integer id;
 
     @Column(name = "can_nombre", length = 100)
@@ -38,12 +41,12 @@ public class NpoCancha implements Serializable {
     private Integer canFoto;
 
     @OneToMany(mappedBy = "clgCancha")
-    private Set<NpoClasesGrupal> clasesGrupales = new LinkedHashSet<>();
+    private List<NpoClasesGrupal> clasesGrupales = new ArrayList<>();
 
     @OneToMany(mappedBy = "can")
-    private Set<NpoHorariosCancha> horariosCanchas = new LinkedHashSet<>();
+    private List<NpoHorariosCancha> horariosCanchas = new ArrayList<>();
 
     @OneToMany(mappedBy = "cancha")
-    private Set<NpoReservasCancha> reservasCanchas = new LinkedHashSet<>();
+    private List<NpoReservasCancha> reservasCanchas = new ArrayList<>();
 
 }
